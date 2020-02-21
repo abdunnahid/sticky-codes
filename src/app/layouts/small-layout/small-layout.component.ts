@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Note } from '../../models';
-import { NoteService } from '../../core/services';
+import { NoteService, ElectronService } from '../../core/services';
 import { Guid } from '../../utils/guid';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog';
-
 @Component({
   selector: 'small-layout',
   templateUrl: './small-layout.component.html',
@@ -18,7 +17,8 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
 
   constructor(
     private noteService: NoteService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private electronService: ElectronService
   ) { }
 
   ngOnInit(): void {
@@ -26,12 +26,16 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
   }
 
   addNote(): void {
+    let clipBoardText = ''
+    if (this.electronService.isElectron) {
+      clipBoardText = this.electronService.clipboard.readHTML();
+    }
     this.notes.push(
       {
         id: Guid.newGuid(),
         title: `New Note`,
         color: '#fff',
-        content: ''
+        content: clipBoardText
       }
     )
     this.activeNote = this.notes.length;
