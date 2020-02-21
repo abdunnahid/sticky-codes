@@ -1,0 +1,22 @@
+<div class="confirm-dialog">
+    <div class="dialog-content" mat-dialog-content>
+        <h3 class="heading-message"> {{ data.messageHeader }} </h3>
+        <h5 *ngIf="data.messageBody"> {{ data.messageBody }} </h5>
+
+        <mat-form-field appearance="outline" *ngIf="showConfirmMessageInput">
+            <mat-label>Confirmation Message</mat-label>
+            <input [(ngModel)]="confirmMessage" matInput placeholder="Confirmation Message">
+        </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button (click)="cancel()">
+            <span *ngIf="data.cancelText">{{data.cancelText}}</span>
+            <span *ngIf="!data.cancelText" >No</span>
+        </button>
+        <button mat-raised-button class="mat-accent" (click)="confirm()">
+            <span *ngIf="data.confirmText">{{data.confirmText}}</span>
+            <span *ngIf="!data.confirmText">Yes</span>
+        </button>
+    </div>
+</div>

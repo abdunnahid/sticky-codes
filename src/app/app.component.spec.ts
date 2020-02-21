@@ -1,7 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { ElectronService } from './core/services';
 
 describe('AppComponent', () => {
@@ -9,7 +8,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       providers: [ElectronService],
-      imports: [RouterTestingModule, TranslateModule.forRoot()]
+      imports: [RouterTestingModule]
     }).compileComponents();
   }));
 
