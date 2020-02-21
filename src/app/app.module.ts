@@ -14,12 +14,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './libraries/angular-material';
 import { SmallLayoutComponent } from './layouts/small-layout/small-layout.component';
+import { NoteComponent } from './components/note/note.component';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SmallLayoutComponent
+    SmallLayoutComponent,
+    NoteComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import { SmallLayoutComponent } from './layouts/small-layout/small-layout.compon
     HttpClientModule,
     CoreModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FroalaEditorModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

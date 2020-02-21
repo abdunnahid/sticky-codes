@@ -10,6 +10,7 @@
 
     .tab-content {
       height: 100%;
+      overflow-x: hidden;
 
       .title {
         $ruler: 16px;
@@ -61,6 +62,10 @@
             box-shadow: inset 1px 1px 2px $color-red, inset -1px -1px 2px $color-white;
           }
         }
+      }
+
+      .note-container {
+        height: calc(100% - 60px);
       }
     }
   }

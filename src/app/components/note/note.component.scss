@@ -1,0 +1,27 @@
+::ng-deep .note {
+
+  height: 100%;
+
+  .fr-box {
+      height: 100%;
+    .fr-toolbar {
+      border: 0;
+    }
+
+    .fr-wrapper {
+      border: 0;
+      height: calc(100% - 50px);
+      .fr-view {
+          height: 100%;
+      }
+    }
+
+    .fr-element {
+      padding-top: 0;
+    }
+
+    .second-toolbar {
+      display: none;
+    }
+  }
+}
