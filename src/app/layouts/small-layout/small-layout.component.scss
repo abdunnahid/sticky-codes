@@ -1,0 +1,67 @@
+::ng-deep .small-layout {
+  height: 100%;
+
+  .mat-tab-group {
+    height: 100%;
+
+    .mat-tab-body-wrapper {
+      height: 100%;
+    }
+
+    .tab-content {
+      height: 100%;
+
+      .title {
+        $ruler: 16px;
+        $color-red: #AE1100;
+        $color-bg: #EBECF0;
+        $color-shadow: #BABECC;
+        $color-white: #FFF;
+
+        padding: 5px;
+
+        input{
+          letter-spacing: -0.2px;
+          font-size: $ruler;
+        }
+
+        input {
+          border: 0;
+          outline: 0;
+          font-size: $ruler;
+          border-radius: $ruler*20;
+          padding: $ruler;
+          background-color: $color-bg;
+          text-shadow: 1px 1px 0 $color-white;
+        }
+
+        label {
+          display: block;
+          width: 100%;
+        }
+
+        input {
+          margin-right: $ruler/2;
+          box-shadow: inset 2px 2px 5px $color-shadow, inset -5px -5px 10px $color-white;
+          width: 100%;
+          box-sizing: border-box;
+          transition: all 0.2s ease-in-out;
+          appearance: none;
+          -webkit-appearance: none;
+
+          &:focus {
+            box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+          }
+        }
+
+        input.ng-dirty.ng-touched.ng-invalid {
+          box-shadow: inset 2px 2px 5px $color-red, inset -5px -5px 10px $color-white;
+
+          &:focus {
+            box-shadow: inset 1px 1px 2px $color-red, inset -1px -1px 2px $color-white;
+          }
+        }
+      }
+    }
+  }
+}

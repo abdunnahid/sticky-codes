@@ -13,11 +13,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './libraries/angular-material';
+import { SmallLayoutComponent } from './layouts/small-layout/small-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    SmallLayoutComponent
   ],
   imports: [
     BrowserModule,
