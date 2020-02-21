@@ -2,7 +2,7 @@
   "name": "sticky-codes",
   "version": "0.1.0",
   "description": "Angular 9 with Electron (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
+  "homepage": "https://github.com/abdunnahid/sticky-codes",
   "author": {
     "name": "Abdun Nahid",
     "email": "abdunnahid@gmail.com"
