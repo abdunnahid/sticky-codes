@@ -4,7 +4,7 @@ import * as url from 'url';
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
-    serve = args.some(val => val === '--serve');
+  serve = args.some(val => val === '--serve');
 
 function createWindow(): BrowserWindow {
 
@@ -20,8 +20,11 @@ function createWindow(): BrowserWindow {
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
-    },
+    }
   });
+
+  win.setAlwaysOnTop(true, 'screen-saver');
+  win.setMenuBarVisibility(false);
 
   if (serve) {
     require('electron-reload')(__dirname, {
