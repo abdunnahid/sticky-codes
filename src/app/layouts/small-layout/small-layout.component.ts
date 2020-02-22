@@ -13,8 +13,8 @@ import { FindNoteComponent } from '../../components/find-note/find-note.componen
 export class SmallLayoutComponent implements OnInit, OnDestroy {
 
   notes: Note[];
-
   activeNote: number = 0;
+  isNoteFinderActive: boolean;
 
 
   @HostListener('window:keyup', ['$event'])
@@ -39,7 +39,6 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.notes = JSON.parse(JSON.stringify(this.noteService.notes)) || [];
-    this.findAndGoToNote();
   }
 
   addNote(): void {
@@ -52,7 +51,8 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
         id: Guid.newGuid(),
         title: `New Note`,
         color: '#fff',
-        content: clipBoardText
+        content: clipBoardText,
+        createdAt: new Date()
       }
     )
     this.activeNote = this.notes.length;
@@ -81,6 +81,11 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
 
   findAndGoToNote(): void {
 
+    if (this.isNoteFinderActive) {
+      return;
+    }
+    this.isNoteFinderActive = true;
+
     const dialogRef = this.dialog.open(FindNoteComponent, {
       data: {
         messageHeader: 'Do you really wanna delete this note?',
@@ -99,6 +104,8 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
         });
         this.activeNote = selectedNoteindex;
       }
+
+      this.isNoteFinderActive = false;
     });
 
   }

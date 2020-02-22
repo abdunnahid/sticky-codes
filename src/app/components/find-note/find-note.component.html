@@ -1,13 +1,10 @@
 <div class="find-note">
   <div class="search-input">
     <label>
-      <input [formControl]="searchCtrl" #searchInput type="text" placeholder="Type something" tabindex="0" />
+      <input [formControl]="searchCtrl" #searchInput type="text" placeholder="Search note by title" tabindex="0" />
     </label>
   </div>
   <mat-list id="list" *ngIf="notes && notes.length > 0">
-
-    <h3 mat-subheader>Notes</h3>
-
     <mat-list-item 
     (click)="selectNote($event)" 
     (keydown.enter)="selectNote($event)" 
@@ -15,9 +12,9 @@
     [tabindex]="index+1" 
     [class.active]="focusedNoteIndex === index">
 
-      <mat-icon mat-list-icon>note</mat-icon>
+      <mat-icon mat-list-icon color="primary">note</mat-icon>
       <h4 mat-line>{{note.title}}</h4>
-      <p mat-line> created at: 10:23 pm</p>
+      <p mat-line> {{note.createdAt | date:"EEEE, m d h:mm a"}}</p>
 
     </mat-list-item>
 

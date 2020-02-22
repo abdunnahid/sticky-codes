@@ -1,5 +1,5 @@
 <div class="small-layout">
-  <mat-tab-group headerPosition="below" [selectedIndex]="activeNote" *ngIf="notes && notes.length > 0">
+  <mat-tab-group headerPosition="below" (selectedTabChange)="updateNotes()" [selectedIndex]="activeNote" *ngIf="notes && notes.length > 0">
 
     <mat-tab [label]="note.title ? ((note.title.length>18)? (note.title | slice:0:18)+'..':(note.title)) : 'No Label'"
       *ngFor="let note of notes; let index=index">

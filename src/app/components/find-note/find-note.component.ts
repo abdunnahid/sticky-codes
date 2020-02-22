@@ -41,6 +41,10 @@ export class FindNoteComponent implements OnInit {
     this.subscribeToSearchInput();
   }
 
+  ngAfterViewInit() {
+    this.fixDialogPosition();
+  }
+
   subscribeToSearchInput(): void {
     this.searchCtrl$ = this.searchCtrl.valueChanges
       .pipe(
@@ -102,6 +106,11 @@ export class FindNoteComponent implements OnInit {
 
   selectNote(e): void {
     this.dialogRef.close(this.notes[this.focusedNoteIndex]);
+  }
+
+  fixDialogPosition(): void {
+    const modalWrapper = document.querySelectorAll('.cdk-global-overlay-wrapper') as NodeListOf<HTMLElement>;
+    modalWrapper[0].classList.add('dialog-position-fix');
   }
 
   ngOnDestroy() {
