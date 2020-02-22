@@ -1,0 +1,26 @@
+mat-toolbar-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings-page {
+
+  .settings {
+    width: 500px;
+    max-width: 80%;
+    margin: 0 auto;
+
+    .mat-divider {
+      margin-top: 20px;
+    }
+
+    .mat-list-item:not(:first-of-type) {
+      margin-top: 20px;
+    }
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+}

@@ -5,6 +5,7 @@ import { Guid } from '../../utils/guid';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog';
 import { FindNoteComponent } from '../../components/find-note/find-note.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'small-layout',
   templateUrl: './small-layout.component.html',
@@ -15,7 +16,6 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
   notes: Note[];
   activeNote: number = 0;
   isNoteFinderActive: boolean;
-
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -34,7 +34,8 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
   constructor(
     private noteService: NoteService,
     public dialog: MatDialog,
-    private electronService: ElectronService
+    private electronService: ElectronService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -108,6 +109,10 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
       this.isNoteFinderActive = false;
     });
 
+  }
+
+  gotoSettings(): void {
+    this.router.navigateByUrl('settings');
   }
 
   ngOnDestroy(): void {

@@ -17,6 +17,8 @@ import { NoteComponent } from './components/note/note.component';
 import { FroalaEditorModule } from 'angular-froala-wysiwyg';
 import { ConfirmDialogModule } from './shared/components/confirm-dialog';
 import { FindNoteComponent } from './components/find-note/find-note.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ComingSoonNoteModule } from './shared/components/coming-soon-note';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { FindNoteComponent } from './components/find-note/find-note.component';
     HomeComponent,
     SmallLayoutComponent,
     NoteComponent,
-    FindNoteComponent
+    FindNoteComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { FindNoteComponent } from './components/find-note/find-note.component';
     MaterialModule,
     FroalaEditorModule.forRoot(),
     ConfirmDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComingSoonNoteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
