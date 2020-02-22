@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Note } from '../../models';
 import { NoteService, ElectronService } from '../../core/services';
 import { Guid } from '../../utils/guid';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog';
+import { FindNoteComponent } from '../../components/find-note/find-note.component';
 @Component({
   selector: 'small-layout',
   templateUrl: './small-layout.component.html',
@@ -15,6 +16,21 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
 
   activeNote: number = 0;
 
+
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.ctrlKey) {
+      if (this.electronService.isElectron && event.key == 'f') {
+        this.findAndGoToNote();
+        return;
+      }
+
+      if (event.key == 'q') {
+        this.findAndGoToNote();
+      }
+    }
+  }
+
   constructor(
     private noteService: NoteService,
     public dialog: MatDialog,
@@ -23,6 +39,7 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.notes = JSON.parse(JSON.stringify(this.noteService.notes)) || [];
+    this.findAndGoToNote();
   }
 
   addNote(): void {
@@ -60,6 +77,30 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
 
   updateNotes(): void {
     this.noteService.notes = this.notes;
+  }
+
+  findAndGoToNote(): void {
+
+    const dialogRef = this.dialog.open(FindNoteComponent, {
+      data: {
+        messageHeader: 'Do you really wanna delete this note?',
+      },
+      panelClass: 'find-note-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe((selectedNote: Note) => {
+
+      if (selectedNote) {
+        let selectedNoteindex = 0;
+        this.notes.forEach((note, index) => {
+          if (note.id === selectedNote.id) {
+            selectedNoteindex = index;
+          }
+        });
+        this.activeNote = selectedNoteindex;
+      }
+    });
+
   }
 
   ngOnDestroy(): void {
