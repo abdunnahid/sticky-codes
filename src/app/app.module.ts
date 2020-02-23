@@ -10,24 +10,28 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { MaterialModule } from './libraries/angular-material';
-import { SmallLayoutComponent } from './layouts/small-layout/small-layout.component';
-import { NoteComponent } from './components/note/note.component';
-import { FroalaEditorModule } from 'angular-froala-wysiwyg';
+import { NoteEditorComponent } from './components/note-editor/note-editor.component';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { ConfirmDialogModule } from './shared/components/confirm-dialog';
 import { FindNoteComponent } from './components/find-note/find-note.component';
-import { SettingsComponent } from './settings/settings.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 import { ComingSoonNoteModule } from './shared/components/coming-soon-note';
+import { SmallLayoutComponent } from './layouts/small-layout/small-layout.component';
+import { MediumLayoutComponent } from './layouts/medium-layout/medium-layout.component';
+import { NoteViewComponent } from './components/note-view/note-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SmallLayoutComponent,
-    NoteComponent,
+    NoteEditorComponent,
     FindNoteComponent,
-    SettingsComponent
+    SettingsComponent,
+    SmallLayoutComponent,
+    MediumLayoutComponent,
+    NoteViewComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,7 @@ import { ComingSoonNoteModule } from './shared/components/coming-soon-note';
     AppRoutingModule,
     MaterialModule,
     FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
     ConfirmDialogModule,
     ReactiveFormsModule,
     ComingSoonNoteModule

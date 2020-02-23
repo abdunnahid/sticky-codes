@@ -2,10 +2,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Note } from '../../models';
 @Component({
   selector: 'note',
-  templateUrl: './note.component.html',
-  styleUrls: ['./note.component.scss']
+  templateUrl: './note-editor.component.html',
+  styleUrls: ['./note-editor.component.scss']
 })
-export class NoteComponent {
+export class NoteEditorComponent {
 
   @Input() note: Note;
   @Output() updated: EventEmitter<Note> = new EventEmitter<Note>()
@@ -15,7 +15,7 @@ export class NoteComponent {
     charCounterCount: true,
     autofocus: true
   }
-  
+
   change(e): void {
     this.updated.emit(this.note);
   }

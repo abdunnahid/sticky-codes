@@ -1,10 +1,10 @@
 import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { NoteService } from '../../core/services';
 import { Note } from '../../models';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { NoteRepository } from '../../repositories';
 
 @Component({
   selector: 'app-find-note',
@@ -32,7 +32,7 @@ export class FindNoteComponent implements OnInit {
   }
 
   constructor(
-    private noteService: NoteService,
+    private noteService: NoteRepository,
     public dialogRef: MatDialogRef<FindNoteComponent>,
   ) { }
 

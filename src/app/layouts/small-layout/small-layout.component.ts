@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Note } from '../../models';
-import { NoteService, ElectronService } from '../../core/services';
+import { ElectronService } from '../../core/services';
 import { Guid } from '../../utils/guid';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog';
 import { FindNoteComponent } from '../../components/find-note/find-note.component';
 import { Router } from '@angular/router';
+import { NoteRepository } from '../../repositories';
 @Component({
   selector: 'small-layout',
   templateUrl: './small-layout.component.html',
@@ -14,25 +15,25 @@ import { Router } from '@angular/router';
 export class SmallLayoutComponent implements OnInit, OnDestroy {
 
   notes: Note[];
-  activeNote: number = 0;
   isNoteFinderActive: boolean;
+  activeNote = 0;
+  isWindowOnFocus: boolean;
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
     if (event.ctrlKey) {
-      if (this.electronService.isElectron && event.key == 'f') {
+      if (this.electronService.isElectron && event.code == 'KeyF') {
         this.findAndGoToNote();
         return;
       }
-
-      if (event.key == 'q') {
+      if (event.code == 'KeyQ') {
         this.findAndGoToNote();
       }
     }
   }
 
   constructor(
-    private noteService: NoteService,
+    private noteService: NoteRepository,
     public dialog: MatDialog,
     private electronService: ElectronService,
     private router: Router
@@ -49,7 +50,7 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
     }
     this.notes.push(
       {
-        id: Guid.newGuid(),
+        id: Guid.newGuid().toString(),
         title: `New Note`,
         color: '#fff',
         content: clipBoardText,
@@ -95,7 +96,6 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((selectedNote: Note) => {
-
       if (selectedNote) {
         let selectedNoteindex = 0;
         this.notes.forEach((note, index) => {

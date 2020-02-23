@@ -15,14 +15,13 @@ function createWindow(): BrowserWindow {
   win = new BrowserWindow({
     x: 0,
     y: 0,
-    width: 400 || size.width,
-    height: 600 || size.height,
+    width: serve ? size.width : 400,
+    height: serve ? size.height : 600,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
     }
   });
-
   win.setAlwaysOnTop(true, 'screen-saver');
   win.setMenuBarVisibility(false);
 
@@ -31,7 +30,8 @@ function createWindow(): BrowserWindow {
       electron: require(`${__dirname}/node_modules/electron`)
     });
     win.loadURL('http://localhost:4200');
-  } else {
+  }
+  else {
     win.loadURL(url.format({
       pathname: path.join(__dirname, 'dist/index.html'),
       protocol: 'file:',
@@ -39,9 +39,25 @@ function createWindow(): BrowserWindow {
     }));
   }
 
+  // Development Settings
   if (serve) {
     win.webContents.openDevTools();
+    win.setAlwaysOnTop(false);
+    win.setMenuBarVisibility(true);
   }
+
+  const window = require('electron').BrowserWindow;
+
+  const focusedWindow = window.getFocusedWindow();
+
+  win.on('focus', () => {
+    console.log('main window focused');
+    focusedWindow.webContents.send('focus');
+  });
+  win.on('blur', () => {
+    console.log('main window blured');
+    focusedWindow.webContents.send('blur');
+  });
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -50,7 +66,6 @@ function createWindow(): BrowserWindow {
     // when you should delete the corresponding element.
     win = null;
   });
-
   return win;
 }
 

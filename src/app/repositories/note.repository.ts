@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Note } from '../../../models';
-import { Guid } from '../../../utils/guid';
+import { Note } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NoteService {
+export class NoteRepository {
 
   private _notes: Note[];
 
@@ -24,7 +23,7 @@ export class NoteService {
     localStorage.setItem('sticky_codes_notes', JSON.stringify(notes));
   }
 
-  getNoteById(id: Guid): Note {
+  getNoteById(id: string): Note {
     if (!id) {
       return;
     }
@@ -38,7 +37,7 @@ export class NoteService {
     return this._notes[index];
   }
 
-  deleteNoteById(id: Guid): Note {
+  deleteNoteById(id: string): Note {
     if (!id) {
       return;
     }
@@ -53,12 +52,10 @@ export class NoteService {
   }
 
   deleteNoteByIndex(index: number): Note {
-    console.log("TCL: NoteService -> index", index)
     if (index === null || index === undefined) {
       return;
     }
     this._notes.splice(index, 1);
-    console.log("TCL: NoteService -> this._notes", this._notes)
     this.notes = this._notes;
   }
 

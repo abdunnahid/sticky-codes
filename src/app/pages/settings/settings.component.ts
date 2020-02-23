@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ElectronService } from '../core/services';
+import { ElectronService } from '../../core/services';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -22,9 +22,11 @@ export class SettingsComponent implements OnInit {
 
     this.settingsForm = this._formBuilder.group({
       alwaysOnTop: [true],
+      deleteConfirm: [true],
       autocopy: ['always'],
       theme: ['light'],
-    })
+    });
+    this.settingsForm.disable();
   }
 
   gotoNotes(): void {

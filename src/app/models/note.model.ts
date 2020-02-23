@@ -1,7 +1,7 @@
 import { Guid } from "../utils/guid";
 
 export interface Note {
-    id: Guid;
+    id: string;
     title: string;
     content: string;
     color: string;
