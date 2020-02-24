@@ -16,8 +16,7 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
 
   notes: Note[];
   isNoteFinderActive: boolean;
-  activeNote = 0;
-  isWindowOnFocus: boolean;
+  activeNoteIndex = 0;
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -57,7 +56,7 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
         createdAt: new Date()
       }
     )
-    this.activeNote = this.notes.length;
+    this.activeNoteIndex = this.notes.length;
   }
 
   deleteNote(index: number): void {
@@ -70,7 +69,7 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.activeNote = index;
+        this.activeNoteIndex = index;
         this.notes.splice(index, 1);
         this.noteService.deleteNoteByIndex(index);
       }
@@ -103,7 +102,7 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
             selectedNoteindex = index;
           }
         });
-        this.activeNote = selectedNoteindex;
+        this.activeNoteIndex = selectedNoteindex;
       }
 
       this.isNoteFinderActive = false;

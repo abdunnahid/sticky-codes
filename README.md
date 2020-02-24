@@ -5,19 +5,18 @@
 
 Sticky Notes that really sticks.
 
-Currently runs with:
+
+With this Desktop App, you can :
+
+- Write & save notes quick access
+- Stick to your screen
+- Find notes
+
+Built with:
 
 - Angular v9.0.0
 - Electron v8.0.0
 - Electron Builder v21.2.0
-
-With this sample, you can :
-
-- Run your app in a local development environment with Electron & Hot reload
-- Run your app in a production environment
-- Package your app into an executable file for Linux, Windows & Mac
-
-/!\ Hot reload only pertains to the renderer process. The main electron process is not able to be hot reloaded, only restarted.
 
 /!\ Angular 8.x CLI needs Node 10.9 or later to works correctly.
 
@@ -67,7 +66,7 @@ You can disable "Developer Tools" by commenting `win.webContents.openDevTools();
 |`npm run electron:windows`| On a Windows OS, builds your application and creates an app consumable in windows 32/64 bit systems |
 |`npm run electron:mac`|  On a MAC OS, builds your application and generates a `.app` file of your application that can be run on Mac |
 
-**Your application is optimised. Only /dist folder and node dependencies are included in the executable.**
+**The application is optimised. Only /dist folder and node dependencies are included in the executable.**
 
 
 ## Browser mode
