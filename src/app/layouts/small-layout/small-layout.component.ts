@@ -7,6 +7,7 @@ import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog';
 import { FindNoteComponent } from '../../components/find-note/find-note.component';
 import { Router } from '@angular/router';
 import { NoteRepository } from '../../repositories';
+import { NavigatorService } from '../../core/services/app/navigator.service';
 @Component({
   selector: 'small-layout',
   templateUrl: './small-layout.component.html',
@@ -35,7 +36,7 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
     private noteService: NoteRepository,
     public dialog: MatDialog,
     private electronService: ElectronService,
-    private router: Router
+    private _navigator: NavigatorService
   ) { }
 
   ngOnInit(): void {
@@ -111,7 +112,7 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
   }
 
   gotoSettings(): void {
-    this.router.navigateByUrl('settings');
+    this._navigator.navigateByUrl('settings');
   }
 
   ngOnDestroy(): void {

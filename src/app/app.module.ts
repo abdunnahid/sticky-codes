@@ -20,6 +20,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { ComingSoonNoteModule } from './shared/components/coming-soon-note';
 import { SmallLayoutComponent } from './layouts/small-layout/small-layout.component';
 import { MediumLayoutComponent } from './layouts/medium-layout/medium-layout.component';
+import { NoteViewPageComponent } from './pages/note-view/note-view.component';
 import { NoteViewComponent } from './components/note-view/note-view.component';
 
 @NgModule({
@@ -31,14 +32,15 @@ import { NoteViewComponent } from './components/note-view/note-view.component';
     SettingsComponent,
     SmallLayoutComponent,
     MediumLayoutComponent,
+    NoteViewPageComponent,
     NoteViewComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
     MaterialModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),

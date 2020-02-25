@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-note-view',
+  selector: 'note-view',
   templateUrl: './note-view.component.html',
   styleUrls: ['./note-view.component.scss']
 })

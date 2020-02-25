@@ -15,8 +15,8 @@ function createWindow(): BrowserWindow {
   win = new BrowserWindow({
     x: 0,
     y: 0,
-    width: serve ? size.width : 400,
-    height: serve ? size.height : 600,
+    width: serve ? size.width - 200 : 400,
+    height: serve ? size.height - 200 : 600,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
@@ -51,11 +51,9 @@ function createWindow(): BrowserWindow {
   const focusedWindow = window.getFocusedWindow();
 
   win.on('focus', () => {
-    console.log('main window focused');
     focusedWindow.webContents.send('focus');
   });
   win.on('blur', () => {
-    console.log('main window blured');
     focusedWindow.webContents.send('blur');
   });
 
