@@ -17,16 +17,17 @@ export class NoteViewPageComponent implements OnInit, OnDestroy {
   note: Note;
 
   constructor(
-    private route: ActivatedRoute,
+    private _activatedroute: ActivatedRoute,
     private noteRepository: NoteRepository
   ) { }
 
   ngOnInit(): void {
-    this.noteId = this.route.snapshot.paramMap.get('id');
+    this.noteId = this._activatedroute.snapshot.paramMap.get('id');
+    this._getNote(this.noteId)
     console.log("TCL: NoteViewComponent -> this.noteId", this.noteId)
   }
 
-  getNote(id: string): void {
+  private _getNote(id: string): void {
     if (!this.noteId) {
       return;
     }

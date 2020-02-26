@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectronService, EventManagerService } from './core/services';
 import { AppConfig } from '../environments/environment';
-import { NavigatorService } from './core/services/app/navigator.service';
+import { NoteFinderService } from './core/services/app/note-finder.service';
+import { WindowFocusChangeService } from './core/services/app/window-focus-change.service';
 
 @Component({
   selector: 'app-root',
@@ -9,38 +10,29 @@ import { NavigatorService } from './core/services/app/navigator.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   constructor(
-    public electronService: ElectronService,
-    private _navigatorService: NavigatorService,
+    private _electronService: ElectronService,
     private _eventManager: EventManagerService,
-
+    private _noteFinderService: NoteFinderService,
+    private _windowFocusChangeService: WindowFocusChangeService
   ) {
-    this._eventManager.initEventManger();
+    _eventManager.init();
+    _noteFinderService.init();
+    _windowFocusChangeService.init();
+  }
 
+  ngOnInit(): void {
+  }
+
+  private _showAppEnvironment(): void {
     console.log('AppConfig', AppConfig);
-
-    if (electronService.isElectron) {
+    if (this._electronService.isElectron) {
       console.log('Mode electron');
     } else {
       console.log('Mode web');
     }
   }
 
-  ngOnInit(): void {
-    this.listenToMainWindowFocusEvents();
-  }
 
-  private listenToMainWindowFocusEvents(): void {
-    this._eventManager.hasMainWindowFocused$.subscribe(
-      (isFocused: boolean) => {
-        console.log("TCL: AppComponent -> isFocused", isFocused)
-        if (isFocused) {
-          this._navigatorService.navigateByUrl('home');
-        }
-        else {
-          this._navigatorService.navigateByUrl('view');
-        }
-      }
-    )
-  }
 }

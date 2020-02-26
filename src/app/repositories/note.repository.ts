@@ -6,7 +6,7 @@ import { Note } from '../models';
 })
 export class NoteRepository {
 
-  private _notes: Note[];
+  private _notes: Note[] = [];
 
   constructor() {
     this._notes = JSON.parse(localStorage.getItem('sticky_codes_notes'));
@@ -21,6 +21,10 @@ export class NoteRepository {
     }
     this._notes = JSON.parse(JSON.stringify(notes));
     localStorage.setItem('sticky_codes_notes', JSON.stringify(notes));
+  }
+
+  eraseAll(): void {
+    localStorage.clear();
   }
 
   getNoteById(id: string): Note {

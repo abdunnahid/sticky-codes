@@ -1,13 +1,14 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Note } from '../../models';
 import { ElectronService } from '../../core/services';
 import { Guid } from '../../utils/guid';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog';
-import { FindNoteComponent } from '../../components/find-note/find-note.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { NoteRepository } from '../../repositories';
 import { NavigatorService } from '../../core/services/app/navigator.service';
+import { NoteStoreService } from '../../store/note-store.service';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 @Component({
   selector: 'small-layout',
   templateUrl: './small-layout.component.html',
@@ -16,37 +17,45 @@ import { NavigatorService } from '../../core/services/app/navigator.service';
 export class SmallLayoutComponent implements OnInit, OnDestroy {
 
   notes: Note[];
-  isNoteFinderActive: boolean;
   activeNoteIndex = 0;
 
-  @HostListener('window:keyup', ['$event'])
-  keyEvent(event: KeyboardEvent) {
-    if (event.ctrlKey) {
-      if (this.electronService.isElectron && event.code == 'KeyF') {
-        this.findAndGoToNote();
-        return;
-      }
-      if (event.code == 'KeyQ') {
-        this.findAndGoToNote();
-      }
-    }
-  }
-
   constructor(
-    private noteService: NoteRepository,
-    public dialog: MatDialog,
-    private electronService: ElectronService,
-    private _navigator: NavigatorService
+    private _noteRepository: NoteRepository,
+    private _dialog: MatDialog,
+    private _electronService: ElectronService,
+    private _navigator: NavigatorService,
+    private _noteStore: NoteStoreService,
+    private _activatedroute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.notes = JSON.parse(JSON.stringify(this.noteService.notes)) || [];
+
+    this.notes = JSON.parse(JSON.stringify(this._noteRepository.notes)) || [];
+    if (this.notes.length > 0) {
+      this._setActiveNote(0);
+    }
+
+    this._activatedroute.queryParamMap.subscribe((paramMap: ParamMap) => {
+      const activeNoteId = paramMap.get('id');
+      if (activeNoteId) {
+        this.activateNoteById(activeNoteId);
+      };
+    })
+
+  }
+
+  private _setActiveNote(noteIndex: number): void {
+    if (noteIndex === null || noteIndex === undefined) {
+      return;
+    }
+    this.activeNoteIndex = noteIndex;
+    this._noteStore.activeNote = this.notes[noteIndex];
   }
 
   addNote(): void {
     let clipBoardText = ''
-    if (this.electronService.isElectron) {
-      clipBoardText = this.electronService.clipboard.readHTML();
+    if (this._electronService.isElectron) {
+      clipBoardText = this._electronService.clipboard.readHTML();
     }
     this.notes.push(
       {
@@ -62,7 +71,7 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
 
   deleteNote(index: number): void {
 
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    const dialogRef = this._dialog.open(ConfirmDialogComponent, {
       data: {
         messageHeader: 'Do you really wanna delete this note?',
       }
@@ -72,47 +81,34 @@ export class SmallLayoutComponent implements OnInit, OnDestroy {
       if (result) {
         this.activeNoteIndex = index;
         this.notes.splice(index, 1);
-        this.noteService.deleteNoteByIndex(index);
+        this._noteRepository.deleteNoteByIndex(index);
       }
     });
+  }
+
+  onTabChange(event: MatTabChangeEvent): void {
+    this.updateNotes();
+    this._setActiveNote(event.index);
   }
 
   updateNotes(): void {
-    this.noteService.notes = this.notes;
+    this._noteRepository.notes = this.notes;
   }
 
-  findAndGoToNote(): void {
-
-    if (this.isNoteFinderActive) {
-      return;
-    }
-    this.isNoteFinderActive = true;
-
-    const dialogRef = this.dialog.open(FindNoteComponent, {
-      data: {
-        messageHeader: 'Do you really wanna delete this note?',
-      },
-      panelClass: 'find-note-dialog'
-    });
-
-    dialogRef.afterClosed().subscribe((selectedNote: Note) => {
-      if (selectedNote) {
-        let selectedNoteindex = 0;
-        this.notes.forEach((note, index) => {
-          if (note.id === selectedNote.id) {
-            selectedNoteindex = index;
-          }
-        });
-        this.activeNoteIndex = selectedNoteindex;
-      }
-
-      this.isNoteFinderActive = false;
-    });
-
-  }
-
-  gotoSettings(): void {
+  gotoSettingsPage(): void {
     this._navigator.navigateByUrl('settings');
+  }
+
+  gotoNotesPage(): void {
+    this._navigator.navigateByUrl('notes');
+  }
+
+  private activateNoteById(id: string): void {
+    this.notes.forEach((note, index) => {
+      if (note.id === id) {
+        this._setActiveNote(index);
+      }
+    })
   }
 
   ngOnDestroy(): void {

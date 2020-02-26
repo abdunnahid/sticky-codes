@@ -1,49 +1,8 @@
-<div class="small-layout">
-  <mat-tab-group headerPosition="below" (selectedTabChange)="onTabChange($event)" [selectedIndex]="activeNoteIndex"
-    *ngIf="notes && notes.length > 0">
-
-    <mat-tab [label]="note.title ? ((note.title.length>18)? (note.title | slice:0:18)+'..':(note.title)) : 'No Label'"
-      *ngFor="let note of notes; let index=index">
-      <div class="tab-content">
-
-        <div class="toolbar">
-
-          <div class="actions">
-            <button mat-icon-button (click)="gotoNotesPage()" color="basic">
-              <mat-icon>list</mat-icon>
-            </button>
-          </div>
-
-          <label class="title">
-            <input 
-              #title 
-              [(ngModel)]="note.title" 
-              type="text" 
-              placeholder="Write note title"
-              (focus)="note.title.toLowerCase() === 'new note' ? note.title = '' : ''" 
-            />
-          </label>
-
-          <div class="actions">
-            <button mat-icon-button (click)="deleteNote(index)" color="warn">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button mat-icon-button (click)="gotoSettingsPage()" color="primary">
-              <mat-icon>settings</mat-icon>
-            </button>
-          </div>
-
-        </div>
-
-        <div class="note-container">
-          <note [note]="note" (updated)="updateNotes()"></note>
-        </div>
-
-      </div>
-
-    </mat-tab>
-
-  </mat-tab-group>
+<div class="notes-page">
+  <div class="note mat-elevation-z2" *ngFor="let note of notes" matRipple (click)="gotoNote(note)">
+    <note-view [note]="note"></note-view>
+    <p class="title">{{note.title}}</p>
+  </div>
 
   <div class="no-notes-found" *ngIf="!notes || notes.length === 0">
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -137,9 +96,8 @@
   </div>
 
   <div class="add" *ngIf="notes && notes.length > 0">
-    <button mat-mini-fab color="primary" (click)="addNote()">
+    <button mat-fab color="primary" (click)="addNote()">
       <mat-icon>add</mat-icon>
     </button>
   </div>
-
 </div>

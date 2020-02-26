@@ -1,0 +1,51 @@
+.notes-page {
+
+  min-height: 100%;
+  background-image: url('assets/notes-background.jpg');
+  background-size: cover;
+  padding: 30px 20px;
+
+  .note {
+    max-height: 200px;
+    min-height: 40px;
+    overflow-y: hidden;
+    padding: 0 16px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    position: relative;
+
+    .title {
+      position: absolute;
+      bottom: 0;
+      background: #eee;
+      width: 100%;
+      padding: 10px;
+      margin: 0;
+      left: 0;
+    }
+  }
+
+  .no-notes-found {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      height: auto;
+      width: 200px;
+      max-width: 80%;
+    }
+
+    h2 {}
+  }
+
+  .add {
+    position: fixed;
+    z-index: 1;
+    bottom: 20px;
+    right: 20px;
+  }
+
+}

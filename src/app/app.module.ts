@@ -22,6 +22,7 @@ import { SmallLayoutComponent } from './layouts/small-layout/small-layout.compon
 import { MediumLayoutComponent } from './layouts/medium-layout/medium-layout.component';
 import { NoteViewPageComponent } from './pages/note-view/note-view.component';
 import { NoteViewComponent } from './components/note-view/note-view.component';
+import { NotesComponent } from './pages/notes/notes.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NoteViewComponent } from './components/note-view/note-view.component';
     SmallLayoutComponent,
     MediumLayoutComponent,
     NoteViewPageComponent,
-    NoteViewComponent
+    NoteViewComponent,
+    NotesComponent
   ],
   imports: [
     BrowserModule,
