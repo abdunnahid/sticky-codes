@@ -13,6 +13,7 @@ export class NoteRepository {
   }
 
   get notes(): Note[] {
+    this._notes = JSON.parse(localStorage.getItem('sticky_codes_notes'));
     return this._notes;
   }
   set notes(notes: Note[]) {

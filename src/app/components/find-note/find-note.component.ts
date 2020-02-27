@@ -32,12 +32,12 @@ export class FindNoteComponent implements OnInit {
   }
 
   constructor(
-    private noteService: NoteRepository,
-    public dialogRef: MatDialogRef<FindNoteComponent>,
+    private _noteRepository: NoteRepository,
+    private _dialogRef: MatDialogRef<FindNoteComponent>,
   ) { }
 
   ngOnInit(): void {
-    this.allNotes = JSON.parse(JSON.stringify(this.noteService.notes)) || [];
+    this.allNotes = JSON.parse(JSON.stringify(this._noteRepository.notes)) || [];
     this.subscribeToSearchInput();
   }
 
@@ -105,7 +105,7 @@ export class FindNoteComponent implements OnInit {
   }
 
   selectNote(e): void {
-    this.dialogRef.close(this.notes[this.focusedNoteIndex]);
+    this._dialogRef.close(this.notes[this.focusedNoteIndex]);
   }
 
   fixDialogPosition(): void {

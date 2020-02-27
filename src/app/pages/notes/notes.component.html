@@ -1,7 +1,8 @@
 <div class="notes-page">
+
   <div class="note mat-elevation-z2" *ngFor="let note of notes" matRipple (click)="gotoNote(note)">
     <note-view [note]="note"></note-view>
-    <p class="title">{{note.title}}</p>
+    <p class="title">{{note.title || 'No Label'}}</p>
   </div>
 
   <div class="no-notes-found" *ngIf="!notes || notes.length === 0">
@@ -100,4 +101,5 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
+  
 </div>

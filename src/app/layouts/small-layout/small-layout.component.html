@@ -17,7 +17,7 @@
           <label class="title">
             <input 
               #title 
-              [(ngModel)]="note.title" 
+              [(ngModel)]="note.title"
               type="text" 
               placeholder="Write note title"
               (focus)="note.title.toLowerCase() === 'new note' ? note.title = '' : ''" 
@@ -25,7 +25,7 @@
           </label>
 
           <div class="actions">
-            <button mat-icon-button (click)="deleteNote(index)" color="warn">
+            <button mat-icon-button (click)="deleteNote(note)" color="warn">
               <mat-icon>delete</mat-icon>
             </button>
             <button mat-icon-button (click)="gotoSettingsPage()" color="primary">
@@ -36,7 +36,7 @@
         </div>
 
         <div class="note-container">
-          <note [note]="note" (updated)="updateNotes()"></note>
+          <note [note]="note" (updated)="updateNote($event)"></note>
         </div>
 
       </div>
