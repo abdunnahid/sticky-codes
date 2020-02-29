@@ -24,16 +24,19 @@ export class WindowFocusChangeService {
 
     this._eventManager.hasMainWindowFocused$.subscribe(
       (isFocused: boolean) => {
+        console.log("WindowFocusChangeService -> init -> isFocused", isFocused)
         if (isFocused) {
           if (this._noteStore.activeNote?.id === null || this._noteStore.activeNote?.id === undefined) {
             return;
           }
+          document.getElementById('app-layout').classList.remove('note-view');
           this._navigator.navigateByUrl(`home?id=${this._noteStore.activeNote.id}`);
         }
         else {
           if (this._noteStore.activeNote?.id === null || this._noteStore.activeNote?.id === undefined) {
             return;
           }
+          document.getElementById('app-layout').classList.add('note-view');
           this._navigator.navigateByUrl(`view/${this._noteStore.activeNote.id}`);
         }
       }

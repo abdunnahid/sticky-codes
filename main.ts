@@ -21,7 +21,8 @@ function createWindow(): BrowserWindow {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
     },
-    icon: path.join(__dirname, 'src/favicon.png')
+    icon: path.join(__dirname, 'src/favicon.png'),
+    frame: false
   });
   win.setAlwaysOnTop(true, 'screen-saver');
   win.setMenuBarVisibility(false);
@@ -46,17 +47,6 @@ function createWindow(): BrowserWindow {
     win.setAlwaysOnTop(false);
     win.setMenuBarVisibility(true);
   }
-
-  const window = require('electron').BrowserWindow;
-
-  const focusedWindow = window.getFocusedWindow();
-
-  win.on('focus', () => {
-    focusedWindow.webContents.send('focus');
-  });
-  win.on('blur', () => {
-    focusedWindow.webContents.send('blur');
-  });
 
   // Emitted when the window is closed.
   win.on('closed', () => {

@@ -5,40 +5,13 @@
     <mat-tab [label]="note.title ? ((note.title.length>18)? (note.title | slice:0:18)+'..':(note.title)) : 'No Label'"
       *ngFor="let note of notes; let index=index">
       <div class="tab-content">
-
-        <div class="toolbar">
-
-          <div class="actions">
-            <button mat-icon-button (click)="gotoNotesPage()" color="basic">
-              <mat-icon>list</mat-icon>
-            </button>
-          </div>
-
-          <label class="title">
-            <input 
-              #title 
-              [(ngModel)]="note.title"
-              type="text" 
-              placeholder="Write note title"
-              (focus)="note.title.toLowerCase() === 'new note' ? note.title = '' : ''" 
-            />
-          </label>
-
-          <div class="actions">
-            <button mat-icon-button (click)="deleteNote(note)" color="warn">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button mat-icon-button (click)="gotoSettingsPage()" color="primary">
-              <mat-icon>settings</mat-icon>
-            </button>
-          </div>
-
-        </div>
-
         <div class="note-container">
-          <note [note]="note" (updated)="updateNote($event)"></note>
+          <note 
+            [note]="note" 
+            (delete)="deleteNote($event)"
+            (updated)="updateNote($event)">
+          </note>
         </div>
-
       </div>
 
     </mat-tab>
@@ -133,13 +106,6 @@
       <circle cx="7.53" cy="301.76" r="7.53" fill="#47e6b1" opacity="0.5"></circle>
     </svg>
     <h3>No notes found!</h3>
-    <button mat-stroked-button color="primary" (click)="addNote()">Create One</button>
-  </div>
-
-  <div class="add" *ngIf="notes && notes.length > 0">
-    <button mat-mini-fab color="primary" (click)="addNote()">
-      <mat-icon>add</mat-icon>
-    </button>
   </div>
 
 </div>

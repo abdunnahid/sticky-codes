@@ -23,6 +23,7 @@ import { MediumLayoutComponent } from './layouts/medium-layout/medium-layout.com
 import { NoteViewPageComponent } from './pages/note-view/note-view.component';
 import { NoteViewComponent } from './components/note-view/note-view.component';
 import { NotesComponent } from './pages/notes/notes.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NotesComponent } from './pages/notes/notes.component';
     MediumLayoutComponent,
     NoteViewPageComponent,
     NoteViewComponent,
-    NotesComponent
+    NotesComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
