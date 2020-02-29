@@ -36,6 +36,10 @@ jobs:
     needs: build
     if: success()
     runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node-version: [ 12.x ]
     
     steps:
       - name: Checkout
@@ -61,3 +65,21 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Build for linux
+        run: npm run electron:linux
+
+      - name: Upload linux build
+        id: upload-linux-build
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release/sticky-codes-${{ steps.extract_branch.outputs.branch }}.AppImage
+          asset_name: sticky-codes-${{ steps.extract_branch.outputs.branch }}.AppImage
+          asset_content_type: application/vnd.appimage
