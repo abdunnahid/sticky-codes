@@ -1,6 +1,9 @@
 name: Create github release
 
-on: [push]
+on:
+  push:
+    branches:
+      - v*
 
 jobs:
   build:
@@ -38,9 +41,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Get current package version
-        id: get_version
-        uses: martinbeentjes/npm-get-version-action@v1.0.0
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
         
       - name: Create Release
         id: create_release
@@ -48,8 +52,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.get_version.current-version }}
-          release_name: ${{ steps.get_version.current-version }}
+          tag_name: ${{ steps.extract_branch.outputs.branch }}
+          release_name: ${{ steps.extract_branch.outputs.branch }}
           body: |
             Changes in this Release
             - First Change
