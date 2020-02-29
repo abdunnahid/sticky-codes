@@ -20,7 +20,8 @@ function createWindow(): BrowserWindow {
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
-    }
+    },
+    icon: path.join(__dirname, 'src/favicon.png')
   });
   win.setAlwaysOnTop(true, 'screen-saver');
   win.setMenuBarVisibility(false);
