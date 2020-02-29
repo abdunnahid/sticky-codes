@@ -3,6 +3,7 @@ import { ElectronService, EventManagerService } from './core/services';
 import { AppConfig } from '../environments/environment';
 import { NoteFinderService } from './core/services/app/note-finder.service';
 import { WindowFocusChangeService } from './core/services/app/window-focus-change.service';
+import { SplashscreenService } from './core/services/app/splashscreen.service';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,13 @@ export class AppComponent implements OnInit {
     private _electronService: ElectronService,
     private _eventManager: EventManagerService,
     private _noteFinderService: NoteFinderService,
-    private _windowFocusChangeService: WindowFocusChangeService
+    private _windowFocusChangeService: WindowFocusChangeService,
+    private _splashscreen: SplashscreenService
   ) {
     _eventManager.init();
     _noteFinderService.init();
     _windowFocusChangeService.init();
+    this._splashscreen.hide();
   }
 
   ngOnInit(): void {
