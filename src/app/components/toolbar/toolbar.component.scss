@@ -3,9 +3,13 @@
   display: flex;
   justify-content: space-between;
   background-color: #fff;
-  -webkit-app-region: drag;
 
   .left {}
+
+  .draggable {
+    flex: 1;
+    -webkit-app-region: drag;
+  }
 
   .right {}
 
