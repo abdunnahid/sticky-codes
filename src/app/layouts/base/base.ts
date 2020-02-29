@@ -29,11 +29,6 @@ export class Base implements IBase {
         })
     }
 
-    addNote(): void {
-        const note = this._noteStore.addNewNote();
-        this.setActiveNote(this.notes.length);
-    }
-
     updateNote(note: Note): void {
         this._noteStore.updateNote(note);
     }

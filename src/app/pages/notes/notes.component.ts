@@ -22,11 +22,6 @@ export class NotesComponent implements OnInit {
     this._noteStore.activeNote = null;
   }
 
-  addNote(): void {
-    const note = this._noteStore.addNewNote();
-    this.gotoNote(note);
-  }
-
   gotoNote(note: Note): void {
     this._navigator.navigateByUrl(`home?id=${note.id}`)
   }
