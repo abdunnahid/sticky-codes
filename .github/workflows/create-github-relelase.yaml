@@ -3,7 +3,7 @@ name: Create github release
 on:
   push:
     branches:
-      - v*
+      - release/*
 
 jobs:
   build:
@@ -45,10 +45,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Extract branch name
+      - name: Extract version number
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
+        run: echo "##[set-output name=version;]$(echo ${GITHUB_REF#refs/heads/release/})"
+        id: extract_version
         
       - name: Create Release
         id: create_release
@@ -56,8 +56,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.extract_branch.outputs.branch }}
-          release_name: ${{ steps.extract_branch.outputs.branch }}
+          tag_name: v${{ steps.extract_version.outputs.version }}
+          release_name: v${{ steps.extract_version.outputs.version }}
           body: |
             Changes in this Release
             - First Change
@@ -83,6 +83,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release/sticky-codes-${{ steps.extract_branch.outputs.branch }}.AppImage
-          asset_name: sticky-codes-${{ steps.extract_branch.outputs.branch }}.AppImage
+          asset_path: ./release/sticky-codes-${{ steps.extract_version.outputs.version }}.AppImage
+          asset_name: sticky-codes-${{ steps.extract_version.outputs.version }}.AppImage
           asset_content_type: application/vnd.appimage
