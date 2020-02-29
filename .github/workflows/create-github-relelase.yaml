@@ -37,6 +37,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Get current package version
+        id: get_version
+        uses: martinbeentjes/npm-get-version-action@v1.0.0
         
       - name: Create Release
         id: create_release
@@ -44,8 +48,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ steps.get_version.current-version }}
+          release_name: ${{ steps.get_version.current-version }}
           body: |
             Changes in this Release
             - First Change
