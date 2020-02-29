@@ -1,0 +1,55 @@
+name: Create github release
+
+on: [push]
+
+jobs:
+  build:
+
+    name: Build
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node-version: [ 12.x ]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Build project
+      run: npm run build:prod
+
+  release:
+    
+    name: Create release
+    needs: build
+    if: success()
+    runs-on: ubuntu-18.04
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
+
