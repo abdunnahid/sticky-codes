@@ -11,53 +11,8 @@
     .tab-content {
       height: 100%;
       overflow-x: hidden;
-
-      .toolbar {
-        padding: 5px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .title {
-          $ruler: 16px;
-          $color-red: #AE1100;
-          $color-bg: #EBECF0;
-          $color-shadow: #BABECC;
-          $color-white: #FFF;
-
-          margin-right: 10px;
-          flex: 1;
-          // display: block;
-          // width: 100%;
-
-          input {
-            letter-spacing: -0.2px;
-            border: 0;
-            outline: 0;
-            font-size: $ruler;
-            border-radius: $ruler*20;
-            padding: $ruler;
-            background-color: $color-bg;
-            text-shadow: 1px 1px 0 $color-white;
-            margin-right: $ruler/2;
-            box-shadow: inset 2px 2px 5px $color-shadow, inset -5px -5px 10px $color-white;
-            box-sizing: border-box;
-            transition: all 0.2s ease-in-out;
-            appearance: none;
-            width: 100%;
-
-            &:focus {
-              box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
-            }
-          }
-        }
-
-        .actions {}
-
-      }
-
       .note-container {
-        height: calc(100% - 60px);
+        height: 100%
       }
     }
   }
@@ -77,12 +32,4 @@
 
     h2 {}
   }
-
-  .add {
-    position: fixed;
-    z-index: 1;
-    bottom: 60px;
-    right: 10px;
-  }
-
 }

@@ -1,3 +1,48 @@
+.note-editor-page {
+  .toolbar {
+    padding: 5px 5px 5px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      $ruler: 16px;
+      $color-red: #AE1100;
+      $color-bg: #EBECF0;
+      $color-shadow: #BABECC;
+      $color-white: #FFF;
+
+      margin-right: 10px;
+      flex: 1;
+
+      input {
+        letter-spacing: -0.2px;
+        border: 0;
+        outline: 0;
+        font-size: $ruler;
+        border-radius: 7px;
+        padding: 10px $ruler;
+        background-color: $color-bg;
+        text-shadow: 1px 1px 0 $color-white;
+        margin-right: $ruler/2;
+        box-shadow: inset 2px 2px 5px $color-shadow, inset -5px -5px 10px $color-white;
+        box-sizing: border-box;
+        transition: all 0.2s ease-in-out;
+        appearance: none;
+        width: 100%;
+
+        &:focus {
+          box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+        }
+      }
+    }
+
+    .actions {}
+
+  }
+
+}
+
 ::ng-deep .note {
 
   height: 100%;

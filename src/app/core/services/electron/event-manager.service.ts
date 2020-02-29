@@ -31,13 +31,13 @@ export class EventManagerService {
   }
 
   private _registerMainWindowFocusEvent(): void {
-    this.electronService.ipcRenderer.on('focus', () => {
+    this.electronService.remote.getCurrentWindow().on('focus', () => {
       this._hasMainWindowFocused.next(true);
     })
   }
 
   private _registerMainWindowBlurEvent(): void {
-    this.electronService.ipcRenderer.on('blur', () => {
+    this.electronService.remote.getCurrentWindow().on('blur', () => {
       this._hasMainWindowFocused.next(false);
     })
   }
