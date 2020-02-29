@@ -33,11 +33,7 @@ export class SettingsComponent implements OnInit {
     });
     this.settingsForm.disable();
   }
-
-  gotoNotes(): void {
-    this.router.navigateByUrl('');
-  }
-
+  
   eraseAll(): void {
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {
       data: {

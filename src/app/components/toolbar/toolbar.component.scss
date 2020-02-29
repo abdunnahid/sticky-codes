@@ -1,0 +1,15 @@
+#sc-toolbar {
+  padding: 0 5px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  -webkit-app-region: drag;
+
+  .left {}
+
+  .right {}
+
+  .mat-icon {
+    color: #838383;
+  }
+}

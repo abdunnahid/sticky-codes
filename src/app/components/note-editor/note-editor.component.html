@@ -1,3 +1,20 @@
-<div class="note">
-  <div [froalaEditor]="options" [(froalaModel)]="note.content" (froalaModelChange)="change($event)"></div>
+<div class="note-editor-page">
+  <div class="toolbar">
+
+    <label class="title">
+      <input [formControl]="title" type="text" placeholder="Write note title"
+        (focus)="title.value.toLowerCase() === 'new note' ? title.setValue('') : ''" />
+    </label>
+
+    <div class="actions">
+      <button mat-icon-button (click)="deleteNote(note)" color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+  </div>
+
+  <div class="note">
+    <div [froalaEditor]="options" [(froalaModel)]="note.content" (froalaModelChange)="change($event)"></div>
+  </div>
 </div>

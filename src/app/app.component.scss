@@ -1,0 +1,19 @@
+#app-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;  
+
+  &.note-view {
+    .toolbar {
+      display: none;
+    }
+    .main-content {
+      padding: 16px;
+    }
+  }
+
+  .main-content {
+    height: calc(100% - 40px);
+    overflow-y: scroll;
+  }
+}
