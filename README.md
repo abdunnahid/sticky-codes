@@ -1,6 +1,10 @@
 [![Angular Logo](https://www.vectorlogo.zone/logos/angular/angular-icon.svg)](https://angular.io/) [![Electron Logo](https://www.vectorlogo.zone/logos/electronjs/electronjs-icon.svg)](https://electronjs.org/)
 
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/abdunnahid/sticky-codes)
+![GitHub contributors](https://img.shields.io/github/contributors/abdunnahid/sticky-codes)
+
+
 # Introduction
 
 Sticky Notes that really sticks.
