@@ -1,18 +1,35 @@
-[![Angular Logo](https://www.vectorlogo.zone/logos/angular/angular-icon.svg)](https://angular.io/) [![Electron Logo](https://www.vectorlogo.zone/logos/electronjs/electronjs-icon.svg)](https://electronjs.org/)
+![Sticky Codes](https://github.com/abdunnahid/sticky-codes/blob/dev/src/assets/sticky-codes-cover.jpg)
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/abdunnahid/sticky-codes)
+![GitHub contributors](https://img.shields.io/github/contributors/abdunnahid/sticky-codes)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/abdunnahid/sticky-codes)
+[![GitHub issues](https://img.shields.io/github/issues/abdunnahid/sticky-codes)](https://github.com/abdunnahid/sticky-codes/issues)
 
 # Introduction
+Another sticky notes app!
+Yes, You are right! But we are different.
 
-Sticky Notes that really sticks.
+## How?
 
+> This sticky notes really sticks.
 
-With this Desktop App, you can :
+> It will be always on top of all your other applications on the desktop. Of Course it is minimizable if you want.
 
-- Write & save notes quick access
-- Stick to your screen
-- Find notes
+> When focus on other application you will get a full screen note preview. 
 
-Built with:
+> Find notes like a pro. Here we are highly inspired by vscode. You might use Ctrl+P to find file in vscode. Here we have Ctrl+F. Search and jump to the note.
+
+> Auto copy texts from your clipboard. If you want to copy something and want paste it to a new note. We covered you. App will auto copy & paste your things into a new note when you add one.
+
+> Text formatting! Yes it has text formatting tools that are not really overwhelming. 
+
+> Keep code snippets on notes. If you wanna have some code in a note and want the same styling and formatting as your code editor, just copy code from your IDE & click on add new note. Brooom! As simple as that. You have a code snippet on sticky codes as like your code editor. 
+
+You know what the fun part is? If we miss out something you want in your sticky notes app. Just make it like yours. Create an issue with your feature request or suggestions. We of course will look into it as soon as possible.
+
+Want to contribute and make things better? You are most welcome. We believe, great things come from a great community.The power of open source is the power of people, the people rule. Show you power by providing any idea, suggestion, bug, feature request, code, design anything. If you want to contribute in code, just pick an issue or make your desired changes and create a PR.
+
+# Technologies Used
 
 - Angular v9.0.0
 - Electron v8.0.0
