@@ -2,6 +2,8 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/abdunnahid/sticky-codes)
 ![GitHub contributors](https://img.shields.io/github/contributors/abdunnahid/sticky-codes)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/abdunnahid/sticky-codes)
+[![GitHub issues](https://img.shields.io/github/issues/abdunnahid/sticky-codes)](https://github.com/abdunnahid/sticky-codes/issues)
 
 # Introduction
 Another sticky notes app!
